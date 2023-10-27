@@ -20,21 +20,22 @@ const SignInForm = () => {
   const [formFields, setFormFields] = useState(defaultFormFields);
   const { email, password } = formFields;
 
+
+
+
   const resetFormFields = () => {
     setFormFields(defaultFormFields);
   };
 
   const signInWithGoogle = async () => {
-    const { user } = await signInWithGooglePopup();
-    await createUserDocumentFromAuth(user);
+    await signInWithGooglePopup();
   };
 
 
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      const response = await signInAuthUserWithEmailAndPassword(email, password)
-      console.log(response)
+      await signInAuthUserWithEmailAndPassword(email, password)
       resetFormFields()
     } catch (error) {
       if(error.code === 'auth/invalid-login-credentials'){
@@ -74,12 +75,14 @@ const SignInForm = () => {
         />
 
         <div className="buttons-container">
-        <Button buttonType="default" type="submit">
-          Sign In
-        </Button>
-        <Button type='button' buttonType="google" onClick={signInWithGoogle}>
-          Google Sign In
-        </Button>
+          <Button buttonType="default" type="submit">
+            Sign In
+          </Button>
+          <div className="google-button">
+            <Button type="button" buttonType="google" onClick={signInWithGoogle}>
+              Google Sign In
+            </Button>
+          </div>
         </div>
       </form>
     </div>

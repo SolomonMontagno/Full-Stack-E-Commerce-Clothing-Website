@@ -1,10 +1,22 @@
 import './category.styles.scss'
-import { useParams } from 'react-router-dom'
+import { useParams, useState, useEffect } from 'react'
 import { useContext } from 'react'
 import { CategoriesContext } from '../../contexts/categories.context'
 
 const Category = () => {
-    { category } = useParams()
+  const { category } = useParams()
+  const { categoriesMap} = useContext(CategoriesContext)
+
+  const [products, setProducts] = useState([])
+
+  useEffect(() => {
+    setProducts(categoriesMap[category])
+  }, [category, categoriesMap])
+    return (
+        <div>
+            
+        </div>
+    )
 }
 
 

@@ -1,7 +1,10 @@
 import './category.styles.scss'
-import { useParams, useState, useEffect } from 'react'
-import { useContext } from 'react'
+import { useContext, useState, useEffect } from 'react'
+import { useParams } from 'react-router-dom'
 import { CategoriesContext } from '../../contexts/categories.context'
+import ProductCard from '../../components/product-card/product-card.component'
+
+
 
 const Category = () => {
   const { category } = useParams()
@@ -12,9 +15,13 @@ const Category = () => {
   useEffect(() => {
     setProducts(categoriesMap[category])
   }, [category, categoriesMap])
+
+
     return (
-        <div>
-            
+        <div className='category-container'>
+            { products &&
+                products.map((product) => (<ProductCard key={product.id} product={product} />))
+            }
         </div>
     )
 }
